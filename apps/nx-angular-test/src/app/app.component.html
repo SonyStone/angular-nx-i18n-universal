@@ -1,8 +1,18 @@
 <div style="text-align:center">
-  <h1>Welcome to nx-angular-test!</h1>
+  <h1 i18n="@@welcome">Welcome to nx-angular-test!</h1>
   <img
     width="450"
     src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
   />
 </div>
-<div>Message: {{ hello$ | async | json }}</div>
+<div i18n="hello$: message from backend@@message">Message: {{ hello$ | async | json }}</div>
+
+<a [routerLink]="['home']">go to home</a>
+<a [routerLink]="['./']">go to main</a>
+
+<p>{{ messages | json }}</p>
+
+<h2>browser Api</h2>
+<p>{{ browser_api | json }}</p>
+
+<router-outlet></router-outlet>

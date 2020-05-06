@@ -1,13 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ModulesModule } from '@nx-angular/modules';
 
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { AppRouterModule } from './app.router-module';
+import { TranslationComponent } from './translation.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [
+    AppRouterModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    HttpClientModule,
+    ModulesModule,
+  ],
+  declarations: [
+    AppComponent,
+    TranslationComponent,
+  ],
+  bootstrap: [
+    AppComponent,
+  ]
 })
 export class AppModule {}

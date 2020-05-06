@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="welcome" datatype="html">
+        <source>Welcome to nx-angular-test!</source>
+        <target state="translated">Добро пожаловать в эту чушь</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="message" datatype="html">
+        <source>Message: <x id="INTERPOLATION" equiv-text="{{ hello$ | async | json }}"/></source>
+        <target state="translated">Сообщение: <x id="INTERPOLATION" equiv-text="{{ hello$ | async | json }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">hello$: message from backend</note>
+      </trans-unit>
+      <trans-unit id="yes" datatype="html">
+        <source>Yes</source>
+        <target state="translated">Да</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/translation.component.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="no" datatype="html">
+        <source>No</source>
+        <target state="translated">Нет</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/translation.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="no_backend" datatype="html">
+        <source>Backend is not working</source>
+        <target state="translated">Бэк не работает</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/translation.component.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

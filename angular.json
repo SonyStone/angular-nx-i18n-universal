@@ -11,11 +11,23 @@
       "root": "apps/nx-angular-test",
       "sourceRoot": "apps/nx-angular-test/src",
       "prefix": "nx-angular",
+      "i18n": {
+        "sourceLocale": {
+          "code": "en",
+          "baseHref": ""
+        },
+        "locales": {
+          "ru": {
+            "translation": "apps/nx-angular-test/src/locale/messages.ru.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/nx-angular-test",
+            "outputPath": "dist/nx-angular-test/browser",
             "index": "apps/nx-angular-test/src/index.html",
             "main": "apps/nx-angular-test/src/main.ts",
             "polyfills": "apps/nx-angular-test/src/polyfills.ts",
@@ -56,6 +68,12 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "ru": {
+              "localize": ["ru"]
+            },
+            "localize": {
+              "localize": ["ru", "en"]
             }
           }
         },
@@ -68,12 +86,18 @@
           "configurations": {
             "production": {
               "browserTarget": "nx-angular-test:build:production"
+            },
+            "ru": {
+              "browserTarget": "nx-angular-test:build:ru" 
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
+            "format": "xlf",
+            "outputPath": "src/locale",
+            "outFile": "messages.xlf",
             "browserTarget": "nx-angular-test:build"
           }
         },
@@ -94,6 +118,51 @@
             "tsConfig": "apps/nx-angular-test/tsconfig.spec.json",
             "passWithNoTests": true,
             "setupFile": "apps/nx-angular-test/src/test-setup.ts"
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/nx-angular-test/server",
+            "main": "apps/nx-angular-test/server.ts",
+            "tsConfig": "apps/nx-angular-test/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "localize": [
+                "en", "ru"
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/nx-angular-test/src/environments/environment.ts",
+                  "with": "apps/nx-angular-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "nx-angular-test:build",
+            "serverTarget": "nx-angular-test:server"
+          },
+          "configurations": {}
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "nx-angular-test:build:production",
+            "serverTarget": "nx-angular-test:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }
@@ -203,6 +272,38 @@
             "tsConfig": "libs/api-interfaces/tsconfig.spec.json",
             "passWithNoTests": true
           }
+        }
+      }
+    },
+    "modules": {
+      "projectType": "library",
+      "root": "libs/modules",
+      "sourceRoot": "libs/modules/src",
+      "prefix": "nx-angular",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/modules/tsconfig.lib.json",
+              "libs/modules/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_libs/modules/**", "!libs/modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/modules/jest.config.js",
+            "tsConfig": "libs/modules/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/modules/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }
