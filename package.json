@@ -49,7 +49,7 @@
     "@angular/platform-server": "^9.1.0",
     "@angular/router": "^9.1.4",
     "@nestjs/common": "^6.8.3",
-    "@nestjs/core": "^6.8.3",
+    "@nestjs/core": "^9.0.5",
     "@nestjs/platform-express": "^6.8.3",
     "@nguniversal/express-engine": "^9.1.0",
     "@nrwl/angular": "9.2.2",
